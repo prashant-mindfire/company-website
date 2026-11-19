@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getStrapiMediaUrl } from "@/lib/utils";
 import { Service } from "@/types/service";
+import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
 interface ServiceCardProps {
   service: Service;
@@ -26,7 +27,7 @@ export default function ServiceCard({
         </h3>
 
         <p className="mt-3 text-sm leading-6 text-gray-600">
-          {service.description}
+          <BlocksRenderer content={service.description} />
         </p>
 
         <p className="mt-4 font-semibold text-blue-600">
