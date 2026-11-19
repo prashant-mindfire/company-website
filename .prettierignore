@@ -1,0 +1,8 @@
+node_modules
+.next
+dist
+build
+.tmp
+.cache
+.strapi
+public/uploads

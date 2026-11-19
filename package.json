@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky"
+    "prepare": "husky",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "repository": {
     "type": "git",
@@ -18,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/prashant-mindfire/company-website/issues"
   },
-  "homepage": "https://github.com/prashant-mindfire/company-website#readme"
+  "homepage": "https://github.com/prashant-mindfire/company-website#readme",
+  "devDependencies": {
+    "prettier": "^3.10.1"
+  }
 }
