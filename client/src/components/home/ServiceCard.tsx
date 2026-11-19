@@ -16,15 +16,16 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           alt={service.image?.alternativeText || service.title}
           fill
           className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
 
       <div className="p-6">
         <h3 className="text-xl font-semibold text-gray-900">{service.title}</h3>
 
-        <p className="mt-3 text-sm leading-6 text-gray-600">
+        <div className="mt-3 text-sm leading-6 text-gray-600">
           <BlocksRenderer content={service.description} />
-        </p>
+        </div>
 
         <p className="mt-4 font-semibold text-blue-600">
           Starting at ${service.price}
