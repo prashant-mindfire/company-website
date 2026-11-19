@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format": "prettier --write client/src",
+    "format:check": "prettier --check client/src"
   },
   "repository": {
     "type": "git",
