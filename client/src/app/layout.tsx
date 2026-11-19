@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/common/Footer";
+import Header from "@/components/common/Header";
+import { getSiteSettings } from "@/services/site.service";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,17 +16,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Company Website",
-  description: "Official company website",
+  title: "TechNova Solutions",
+  description: "Innovative technology solutions for businesses",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+const RootLayout = async ({ children }: LayoutProps<"/">) => {
+  const settings = await getSiteSettings();
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Header />
+          {children}
+        <Footer
+          companyName={settings.companyName}
+          footerText={settings.footerText}
+        />
+      </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
