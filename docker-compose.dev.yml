@@ -1,0 +1,15 @@
+# docker-compose.dev.yml
+services:
+  # strapi database
+  strapiDB:
+    image: postgres:16-alpine
+    env_file:
+      - strapi-cms/.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - strapi-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  strapi-data:
