@@ -1,0 +1,22 @@
+{
+  "name": "company-website",
+  "version": "1.0.0",
+  "description": "company website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prashant-mindfire/company-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/prashant-mindfire/company-website/issues"
+  },
+  "homepage": "https://github.com/prashant-mindfire/company-website#readme"
+}
