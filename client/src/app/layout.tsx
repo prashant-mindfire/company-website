@@ -29,7 +29,7 @@ const RootLayout = async ({ children }: LayoutProps<"/">) => {
     >
       <body className="min-h-full flex flex-col">
         <Header />
-          {children}
+        {children}
         <Footer
           companyName={settings.companyName}
           footerText={settings.footerText}

@@ -3,10 +3,7 @@ interface HeroSectionProps {
   subtitle: string;
 }
 
-export default function HeroSection({
-  title,
-  subtitle,
-}: HeroSectionProps) {
+export default function HeroSection({ title, subtitle }: HeroSectionProps) {
   return (
     <section className="bg-blue-700 px-6 py-24 text-white">
       <div className="mx-auto max-w-7xl">
@@ -14,9 +11,7 @@ export default function HeroSection({
           {title}
         </h1>
 
-        <p className="mt-6 max-w-2xl text-lg text-blue-100">
-          {subtitle}
-        </p>
+        <p className="mt-6 max-w-2xl text-lg text-blue-100">{subtitle}</p>
       </div>
     </section>
   );

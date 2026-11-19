@@ -1,8 +1,6 @@
 import { env } from "@/config/env";
 
-export function getStrapiMediaUrl(
-  url?: string | null
-): string {
+export function getStrapiMediaUrl(url?: string | null): string {
   if (!url) {
     return "/images/placeholder.png";
   }

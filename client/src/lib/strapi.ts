@@ -11,10 +11,7 @@ const strapiFetch = async <T>(
 ): Promise<T> => {
   const { query, revalidate } = options;
 
-  const url = new URL(
-    `/api/${endpoint}`,
-    env.CMS_URL
-  );
+  const url = new URL(`/api/${endpoint}`, env.CMS_URL);
 
   if (query) {
     Object.entries(query).forEach(([key, value]) => {
@@ -37,9 +34,7 @@ const strapiFetch = async <T>(
       ? { cache: "no-store" as const }
       : {
           cache: "force-cache" as const,
-          ...(revalidate !== undefined
-            ? { next: { revalidate } }
-            : {}),
+          ...(revalidate !== undefined ? { next: { revalidate } } : {}),
         }),
   });
 
@@ -50,6 +45,6 @@ const strapiFetch = async <T>(
   }
 
   return response.json();
-}
+};
 
 export default strapiFetch;

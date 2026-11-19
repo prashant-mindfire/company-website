@@ -2,12 +2,8 @@ import strapiFetch from "@/lib/strapi";
 import { BlogPost } from "@/types/blog";
 import { StrapiResponse } from "@/types/strapi";
 
-export const getFeaturedBlogs = async (
-  limit = 3
-): Promise<BlogPost[]> => {
-  const response = await strapiFetch<
-    StrapiResponse<BlogPost[]>
-  >("blog-posts", {
+export const getFeaturedBlogs = async (limit = 3): Promise<BlogPost[]> => {
+  const response = await strapiFetch<StrapiResponse<BlogPost[]>>("blog-posts", {
     query: {
       populate: "*",
       "filters[featured][$eq]": "true",
@@ -17,4 +13,4 @@ export const getFeaturedBlogs = async (
   });
 
   return response.data;
-}
+};
