@@ -1,28 +1,30 @@
+import Card from "../common/ui/Card";
+import Container from "../common/ui/Container";
+import Section from "../common/ui/Section";
+
 interface MissionVisionProps {
   mission?: string;
   vision?: string;
 }
 
-const MissionVision = ({ mission, vision }: MissionVisionProps) => {
+export default function MissionVision({ mission, vision }: MissionVisionProps) {
   return (
-    <section className="px-6 py-20">
-      <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2">
-        <div className="rounded-2xl bg-blue-50 p-8">
-          <h2 className="mb-4 text-2xl font-bold text-slate-900">
-            Our Mission
-          </h2>
+    <Section>
+      <Container>
+        <div className="grid gap-8 md:grid-cols-2">
+          <Card padding="lg">
+            <h2 className="text-2xl font-bold text-slate-900">Our Mission</h2>
 
-          <p className="leading-8 text-slate-600">{mission}</p>
+            <p className="mt-4 leading-8 text-slate-600">{mission}</p>
+          </Card>
+
+          <Card padding="lg">
+            <h2 className="text-2xl font-bold text-slate-900">Our Vision</h2>
+
+            <p className="mt-4 leading-8 text-slate-600">{vision}</p>
+          </Card>
         </div>
-
-        <div className="rounded-2xl bg-slate-100 p-8">
-          <h2 className="mb-4 text-2xl font-bold text-slate-900">Our Vision</h2>
-
-          <p className="leading-8 text-slate-600">{vision}</p>
-        </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
-};
-
-export default MissionVision;
+}

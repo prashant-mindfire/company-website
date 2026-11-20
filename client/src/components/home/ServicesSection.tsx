@@ -1,5 +1,5 @@
 import { Service } from "@/types/service";
-import ServiceCard from "./ServiceCard";
+import ServiceCard from "../common/ServiceCard";
 
 interface ServicesSectionProps {
   services: Service[];

@@ -1,28 +1,24 @@
-import ServiceCard from "@/components/home/ServiceCard";
+import ServiceCard from "@/components/common/ServiceCard";
 import { Service } from "@/types/service";
+import Container from "../common/ui/Container";
+import Section from "../common/ui/Section";
+import SectionHeading from "../common/ui/SectionHeading";
 
 interface ServicesPageSectionProps {
   services: Service[];
 }
 
-const ServicesPageSection = ({ services }: ServicesPageSectionProps) => {
+export default function ServicesPageSection({
+  services,
+}: ServicesPageSectionProps) {
   return (
-    <section className="px-6 py-20">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-12 text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-600">
-            What We Do
-          </p>
-
-          <h1 className="text-3xl font-bold text-slate-900 md:text-5xl">
-            Our Services
-          </h1>
-
-          <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-600">
-            Explore our technology services designed to help businesses
-            innovate, scale, and grow.
-          </p>
-        </div>
+    <Section>
+      <Container>
+        <SectionHeading
+          eyebrow="What We Do"
+          title="Our Services"
+          description="Explore our technology services designed to help businesses innovate, scale, and grow."
+        />
 
         {services.length === 0 ? (
           <p className="text-center text-slate-500">
@@ -35,9 +31,7 @@ const ServicesPageSection = ({ services }: ServicesPageSectionProps) => {
             ))}
           </div>
         )}
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
-};
-
-export default ServicesPageSection;
+}

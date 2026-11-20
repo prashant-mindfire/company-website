@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
 import { getSiteSettings } from "@/services/site.service";
 import { getTeamMembers } from "@/services/team.service";
-import AboutHero from "@/components/about/AboutHero";
 import MissionVision from "@/components/about/MissionVision";
 import TeamSection from "@/components/about/TeamSection";
+import PageHero from "@/components/common/ui/PageHero";
 
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "About Us | TechNova Solutions",
-  description:
-    "Learn about TechNova Solutions, our mission, vision, and the team behind our technology solutions.",
+  description: "Learn about TechNova Solutions, our mission, vision, and team.",
 };
 
 export default async function AboutPage() {
@@ -21,7 +20,11 @@ export default async function AboutPage() {
 
   return (
     <main>
-      <AboutHero companyName={settings.companyName} />
+      <PageHero
+        eyebrow="About Us"
+        title={`Get to know ${settings.companyName}`}
+        description="We help businesses transform their ideas into meaningful digital experiences through technology and innovation."
+      />
       <MissionVision mission={settings.mission} vision={settings.vision} />
       <TeamSection members={teamMembers} />
     </main>

@@ -1,7 +1,8 @@
 import Image from "next/image";
+import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { getStrapiMediaUrl } from "@/lib/utils";
 import { Service } from "@/types/service";
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import Card from "./ui/Card";
 
 interface ServiceCardProps {
   service: Service;
@@ -9,28 +10,30 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ service }: ServiceCardProps) {
   return (
-    <article className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:shadow-lg">
-      <div className="relative h-52">
+    <Card padding="none" hoverable className="overflow-hidden">
+      <div className="relative aspect-4/3 bg-slate-100">
         <Image
           src={getStrapiMediaUrl(service.image?.url)}
           alt={service.image?.alternativeText || service.title}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
 
       <div className="p-6">
-        <h3 className="text-xl font-semibold text-gray-900">{service.title}</h3>
+        <h3 className="text-xl font-semibold text-slate-900">
+          {service.title}
+        </h3>
 
-        <div className="mt-3 text-sm leading-6 text-gray-600">
+        <div className="mt-3 text-sm leading-7 text-slate-600">
           <BlocksRenderer content={service.description} />
         </div>
 
-        <p className="mt-4 font-semibold text-blue-600">
-          Starting at ${service.price}
+        <p className="mt-5 text-lg font-bold text-blue-600">
+          ${service.price.toLocaleString("en-US")}
         </p>
       </div>
-    </article>
+    </Card>
   );
 }
