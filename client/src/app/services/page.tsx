@@ -18,6 +18,6 @@ const ServicesPage = async () => {
       <ServicesPageSection services={services} />
     </main>
   );
-}
+};
 
 export default ServicesPage;

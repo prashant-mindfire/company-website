@@ -14,4 +14,4 @@ export const getTeamMembers = async (): Promise<TeamMember[]> => {
   );
 
   return response.data;
-}
+};

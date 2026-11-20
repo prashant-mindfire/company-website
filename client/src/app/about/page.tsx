@@ -22,10 +22,7 @@ export default async function AboutPage() {
   return (
     <main>
       <AboutHero companyName={settings.companyName} />
-      <MissionVision
-        mission={settings.mission}
-        vision={settings.vision}
-      />
+      <MissionVision mission={settings.mission} vision={settings.vision} />
       <TeamSection members={teamMembers} />
     </main>
   );

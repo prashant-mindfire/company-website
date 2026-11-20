@@ -5,9 +5,7 @@ interface ServicesPageSectionProps {
   services: Service[];
 }
 
-const ServicesPageSection = ({
-  services,
-}: ServicesPageSectionProps) => {
+const ServicesPageSection = ({ services }: ServicesPageSectionProps) => {
   return (
     <section className="px-6 py-20">
       <div className="mx-auto max-w-7xl">
@@ -21,8 +19,8 @@ const ServicesPageSection = ({
           </h1>
 
           <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-600">
-            Explore our technology services designed to help
-            businesses innovate, scale, and grow.
+            Explore our technology services designed to help businesses
+            innovate, scale, and grow.
           </p>
         </div>
 
@@ -33,16 +31,13 @@ const ServicesPageSection = ({
         ) : (
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
-              <ServiceCard
-                key={service.documentId}
-                service={service}
-              />
+              <ServiceCard key={service.documentId} service={service} />
             ))}
           </div>
         )}
       </div>
     </section>
   );
-}
+};
 
 export default ServicesPageSection;

@@ -5,9 +5,7 @@ interface TeamSectionProps {
   members: TeamMember[];
 }
 
-const TeamSection = ({
-  members,
-}: TeamSectionProps) => {
+const TeamSection = ({ members }: TeamSectionProps) => {
   return (
     <section className="bg-slate-50 px-6 py-20">
       <div className="mx-auto max-w-7xl">
@@ -21,8 +19,8 @@ const TeamSection = ({
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-slate-600">
-            Meet the people behind our ideas, innovation, and
-            technology solutions.
+            Meet the people behind our ideas, innovation, and technology
+            solutions.
           </p>
         </div>
 
@@ -33,16 +31,13 @@ const TeamSection = ({
         ) : (
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {members.map((member) => (
-              <TeamMemberCard
-                key={member.documentId}
-                member={member}
-              />
+              <TeamMemberCard key={member.documentId} member={member} />
             ))}
           </div>
         )}
       </div>
     </section>
   );
-}
+};
 
 export default TeamSection;

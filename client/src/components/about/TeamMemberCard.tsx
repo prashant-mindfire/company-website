@@ -6,9 +6,7 @@ interface TeamMemberCardProps {
   member: TeamMember;
 }
 
-const TeamMemberCard = ({
-  member,
-}: TeamMemberCardProps) => {
+const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
   return (
     <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
       <div className="relative aspect-4/3 bg-slate-100">
@@ -22,17 +20,13 @@ const TeamMemberCard = ({
       </div>
 
       <div className="p-6">
-        <h3 className="text-xl font-semibold text-slate-900">
-          {member.name}
-        </h3>
+        <h3 className="text-xl font-semibold text-slate-900">{member.name}</h3>
 
         <p className="mt-1 text-sm font-medium text-blue-600">
           {member.designation}
         </p>
 
-        <p className="mt-4 text-sm leading-7 text-slate-600">
-          {member.bio}
-        </p>
+        <p className="mt-4 text-sm leading-7 text-slate-600">{member.bio}</p>
 
         {member.email && (
           <a
@@ -45,6 +39,6 @@ const TeamMemberCard = ({
       </div>
     </article>
   );
-}
+};
 
 export default TeamMemberCard;

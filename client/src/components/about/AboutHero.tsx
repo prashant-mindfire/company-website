@@ -2,9 +2,7 @@ interface AboutHeroProps {
   companyName: string;
 }
 
-const AboutHero = ({
-  companyName,
-}: AboutHeroProps) => {
+const AboutHero = ({ companyName }: AboutHeroProps) => {
   return (
     <section className="bg-slate-900 px-6 py-20 text-white">
       <div className="mx-auto max-w-7xl text-center">
@@ -17,8 +15,8 @@ const AboutHero = ({
         </h1>
 
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-          We help businesses transform their ideas into meaningful
-          digital experiences through technology and innovation.
+          We help businesses transform their ideas into meaningful digital
+          experiences through technology and innovation.
         </p>
       </div>
     </section>
