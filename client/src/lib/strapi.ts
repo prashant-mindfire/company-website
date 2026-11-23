@@ -27,16 +27,19 @@ const strapiFetch = async <T>(
     headers.Authorization = `Bearer ${env.CMS_API_TOKEN}`;
   }
 
-  const response = await fetch(url.toString(), {
+  const fetchOptions: RequestInit & {
+    next?: { revalidate: number };
+  } = {
     method: "GET",
     headers,
     ...(revalidate === false
       ? { cache: "no-store" as const }
-      : {
-          cache: "force-cache" as const,
-          ...(revalidate !== undefined ? { next: { revalidate } } : {}),
-        }),
-  });
+      : typeof revalidate === "number"
+        ? { next: { revalidate } }
+        : { cache: "force-cache" as const }),
+  };
+
+  const response = await fetch(url.toString(), fetchOptions);
 
   if (!response.ok) {
     throw new Error(
