@@ -1,61 +1,109 @@
-# 🚀 Getting started with Strapi
+# Strapi CMS
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+The Strapi 5 backend for the company website. It manages website content and stores contact form submissions.
 
-### `develop`
+## Requirements
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+- Node.js 22 through 26
+- npm 6 or newer
+- SQLite for the default local setup, or PostgreSQL for Docker-based development
 
-```
-npm run develop
-# or
-yarn develop
-```
+## Local Setup
 
-### `start`
-
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
-
-```
-npm run start
-# or
-yarn start
+```bash
+cd strapi-cms
+cp .env.example .env
+npm install
+npm run dev
 ```
 
-### `build`
+Replace the placeholder secrets in `.env` before using the CMS. The API runs at <http://localhost:1337>, and the admin panel is at <http://localhost:1337/admin>.
 
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
+## Environment Variables
 
+```dotenv
+HOST=0.0.0.0
+PORT=1337
+APP_KEYS=replace_with_secure_comma_separated_keys
+API_TOKEN_SALT=replace_with_a_secure_value
+ADMIN_JWT_SECRET=replace_with_a_secure_value
+TRANSFER_TOKEN_SALT=replace_with_a_secure_value
+JWT_SECRET=replace_with_a_secure_value
+ENCRYPTION_KEY=replace_with_a_secure_value
 ```
+
+Use unique, high-entropy values for every secret in deployed environments.
+
+
+## Database
+
+Strapi defaults to SQLite when `DATABASE_CLIENT` is not set. The default database file is `.tmp/data.db`.
+
+To use PostgreSQL with the repository's Docker Compose service:
+
+```bash
+cd ..
+docker compose -f docker-compose.dev.yml up -d
+```
+
+Add these values to `strapi-cms/.env`:
+
+```dotenv
+DATABASE_CLIENT=postgres
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_NAME=strapi
+DATABASE_USERNAME=strapi
+DATABASE_PASSWORD=strapi
+DATABASE_SSL=false
+```
+
+Stop and remove the container while preserving the database volume:
+
+```bash
+docker compose -f docker-compose.dev.yml down
+```
+
+## API Token
+
+The Next.js client uses a Strapi API token for authenticated content requests and contact message submission.
+
+1. Open <http://localhost:1337/admin>.
+2. Open **Settings > Global settings > API Tokens**.
+3. Grant read access to the content types used by the website.
+4. Grant create access to `contact-message` for contact form submissions.
+5. Copy the token to `CMS_API_TOKEN` in `client/.env.local`.
+
+## Content Types
+
+This CMS includes API collections for blog posts, contact messages, services, site settings, and team members.
+
+## Available Scripts
+
+```bash
+npm run dev        # Start Strapi with auto-reload
+npm run develop    # Alias for npm run dev
+npm run build      # Build the admin panel
+npm run start      # Start the built CMS
+npm run console    # Open the Strapi console
+npm run strapi     # Run a Strapi CLI command
+```
+
+## Production
+
+Create a production `.env` with secure application secrets and a managed database configuration. Build and start Strapi:
+
+```bash
+npm install
 npm run build
-# or
-yarn build
+npm run start
 ```
 
-## ⚙️ Deployment
+Deploy Strapi separately from the Next.js client and configure the client's `CMS_URL` with the public CMS base URL.
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+## Security Notes
 
-```
-yarn strapi deploy
-```
-
-## 📚 Learn more
-
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
-
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
-
-## ✨ Community
-
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+- Never commit `.env` or real API tokens.
+- Restrict API tokens to the minimum required permissions.
+- Use a persistent PostgreSQL or managed database for production.
+- Protect and back up the database and uploaded media.

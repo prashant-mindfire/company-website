@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Website Client
 
-## Getting Started
+The public website for the company, built with Next.js 16, React 19, and TypeScript.
 
-First, run the development server:
+The client reads content from Strapi and exposes a server-side contact form endpoint at `/api/contact`.
+
+## Requirements
+
+- Node.js 22 or newer
+- npm
+- A running Strapi CMS
+
+## Local Setup
+
+1. Start Strapi and confirm that it is reachable at `http://localhost:1337`.
+2. Create the client environment file:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd client
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Configure `.env.local`:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```dotenv
+NODE_ENV=development
+CMS_URL=http://localhost:1337
+CMS_API_TOKEN=your_strapi_api_token
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `CMS_URL` is required. The application throws a configuration error during startup if it is missing.
+- `CMS_API_TOKEN` is required for the contact form and can be used by content requests that need Strapi authentication.
+- These variables are server-side values. Do not prefix them with `NEXT_PUBLIC_`.
 
-## Learn More
+4. Install dependencies and start the development server:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open <http://localhost:3000>.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Available Scripts
 
-## Deploy on Vercel
+```bash
+npm run dev    # Start the Next.js development server
+npm run lint   # Run ESLint
+npm run build  # Create a production build
+npm run start  # Run the production build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Strapi Integration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The client uses `CMS_URL` to build requests for `/api/*` endpoints. It sends `CMS_API_TOKEN` as a Bearer token when the token is configured.
+
+Relevant implementation areas:
+
+- `src/lib/strapi.ts` - shared Strapi fetch helper
+- `src/config/env.ts` - environment configuration
+- `src/services/` - content-specific data services
+- `src/app/api/contact/route.ts` - contact form API route
+
+The contact endpoint validates submitted data before posting it to Strapi's `/api/contact-messages` collection.
+
+## Pages
+
+- `/` - Home
+- `/about` - About
+- `/services` - Services
+- `/team` - Team
+- `/blog` - Blog listing
+- `/blog/[slug]` - Blog detail
+- `/contact` - Contact
+
+## Strapi API Token
+
+Create a Strapi API token in **Settings > Global settings > API Tokens**.
+
+At minimum, grant read access to the content types used by the pages. The contact form also needs create access for the `contact-message` API. Copy the token into `CMS_API_TOKEN` in `.env.local`.
+
+## Production Build
+
+```bash
+npm run lint
+npm run build
+npm run start
+```
+
+For deployment, provide `CMS_URL` and `CMS_API_TOKEN` as server-side environment variables. `CMS_URL` should point to the public Strapi base URL, for example `https://cms.example.com`.
+
+Use HTTPS in production and restrict the API token to the permissions the website needs.
