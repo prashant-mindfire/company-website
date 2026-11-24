@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -14,7 +15,17 @@ const navigation = [
   { label: "Contact", href: "/contact" },
 ];
 
-const Header = () => {
+interface HeaderProps {
+  logoUrl?: string | null;
+  logoAlt?: string;
+  siteName?: string;
+}
+
+const Header = ({
+  logoUrl,
+  logoAlt,
+  siteName = "TechNova Solutions",
+}: HeaderProps) => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -38,10 +49,21 @@ const Header = () => {
         <Link
           href="/"
           onClick={closeMenu}
-          className="text-xl font-bold tracking-tight text-blue-700
-            dark:text-blue-400"
+          className="flex items-center gap-2.5 text-xl font-bold tracking-tight
+            text-blue-700 dark:text-blue-400"
         >
-          TechNova Solutions
+          {logoUrl && (
+            <Image
+              src={logoUrl}
+              alt={logoAlt || siteName}
+              width={180}
+              height={48}
+              unoptimized={logoUrl.endsWith(".svg")}
+              className="h-10 w-auto object-contain"
+              loading="eager"
+            />
+          )}
+          <span>{siteName}</span>
         </Link>
 
         <nav

@@ -10,19 +10,22 @@ interface TeamMemberCardProps {
 
 export default function TeamMemberCard({ member }: TeamMemberCardProps) {
   return (
-    <Card padding="none" hoverable className="overflow-hidden">
-      <div className="relative aspect-4/3 bg-slate-100">
+    <Card
+      padding="none"
+      hoverable
+      className="flex h-full flex-col overflow-hidden"
+    >
+      <div className="relative h-52 w-full shrink-0 bg-slate-100">
         <Image
           src={getStrapiMediaUrl(member.photo?.url)}
           alt={member.photo?.alternativeText || member.name}
-          width={800}
-          height={450}
+          fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="h-52 w-full object-cover"
+          className="object-cover"
         />
       </div>
 
-      <div className="p-6">
+      <div className="flex flex-1 flex-col p-6">
         <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
           {member.name}
         </h3>
@@ -38,7 +41,7 @@ export default function TeamMemberCard({ member }: TeamMemberCardProps) {
         {member.email && (
           <Link
             href={`mailto:${member.email}`}
-            className="mt-4 inline-block text-sm font-medium text-slate-900 hover:text-blue-600 dark:text-blue-400"
+            className="mt-auto pt-4 inline-block self-start text-sm font-medium text-slate-900 hover:text-blue-600 dark:text-blue-400"
           >
             {member.email}
           </Link>

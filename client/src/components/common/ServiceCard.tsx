@@ -10,19 +10,23 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ service }: ServiceCardProps) {
   return (
-    <Card padding="none" hoverable className="overflow-hidden">
-      <div className="relative aspect-4/3 bg-slate-100">
+    <Card
+      padding="none"
+      hoverable
+      className="flex h-full flex-col overflow-hidden"
+    >
+      <div className="relative h-52 w-full shrink-0 bg-slate-100">
         <Image
           src={getStrapiMediaUrl(service.image?.url)}
           alt={service.image?.alternativeText || service.title}
-          width={800}
-          height={450}
+          fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="h-52 w-full object-cover"
+          className="object-cover"
         />
       </div>
 
-      <div className="p-6">
+      {/* flex-1 stretches this body to fill the card, mt-auto pins the price */}
+      <div className="flex flex-1 flex-col p-6">
         <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
           {service.title}
         </h3>
@@ -31,7 +35,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           <BlocksRenderer content={service.description} />
         </div>
 
-        <p className="mt-5 text-lg font-bold text-blue-600 dark:text-blue-400">
+        <p className="mt-auto pt-5 text-lg font-bold text-blue-600 dark:text-blue-400">
           ${service.price.toLocaleString("en-US")}
         </p>
       </div>

@@ -9,8 +9,8 @@ interface BlogCardProps {
 
 export default function BlogCard({ blog }: BlogCardProps) {
   return (
-    <article className="overflow-hidden rounded-xl border border-gray-200 bg-white">
-      <div className="relative h-52">
+    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+      <div className="relative h-52 w-full shrink-0">
         <Image
           src={getStrapiMediaUrl(blog.image?.url)}
           alt={blog.image?.alternativeText || blog.title}
@@ -21,7 +21,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
         />
       </div>
 
-      <div className="p-6">
+      <div className="flex flex-1 flex-col p-6">
         <p className="text-sm text-gray-500 dark:text-gray-400">
           {blog.author} ·{" "}
           {new Date(blog.publishedDate).toLocaleDateString("en-US", {
@@ -42,7 +42,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
 
         <Link
           href={`/blog/${blog.slug}`}
-          className="mt-5 inline-block font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+          className="mt-auto pt-5 inline-block self-start font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
         >
           Read more →
         </Link>
