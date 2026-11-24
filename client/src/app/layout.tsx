@@ -1,42 +1,54 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
 import { getSiteSettings } from "@/services/site.service";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import "./globals.css";
+import ThemeProvider from "@/providers/ThemeProviders";
 
 export const metadata: Metadata = {
-  title: "TechNova Solutions",
-  description: "Innovative technology solutions for businesses",
+  title: {
+    default: "TechNova Solutions | Digital Transformation",
+    template: "%s | TechNova Solutions",
+  },
+  description:
+    "TechNova Solutions helps businesses grow through innovative technology, modern software solutions, and exceptional digital experiences.",
+  applicationName: "TechNova Solutions",
+  openGraph: {
+    type: "website",
+    siteName: "TechNova Solutions",
+    title: "TechNova Solutions | Digital Transformation",
+    description:
+      "Innovative technology and software solutions for growing businesses.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TechNova Solutions",
+    description:
+      "Innovative technology and software solutions for growing businesses.",
+  },
 };
 
-const RootLayout = async ({ children }: LayoutProps<"/">) => {
+export default async function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   const settings = await getSiteSettings();
+
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-        <Header />
-        {children}
-        <Footer
-          companyName={settings.companyName}
-          footerText={settings.footerText}
-        />
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen">
+        <ThemeProvider>
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer
+              companyName={settings.companyName}
+              footerText={settings.footerText}
+            />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
-};
-
-export default RootLayout;
+}
