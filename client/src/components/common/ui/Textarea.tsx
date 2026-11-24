@@ -47,7 +47,7 @@ export default function Textarea<T extends FieldValues>({
     <div className="w-full">
       <label
         htmlFor={id}
-        className="mb-2 block text-sm font-medium text-slate-700"
+        className="mb-2 block text-sm font-medium text-slate-700 dark:text-gray-300"
       >
         {label}
       </label>
@@ -63,16 +63,21 @@ export default function Textarea<T extends FieldValues>({
           "w-full resize-y rounded-lg border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition",
           "placeholder:text-slate-400",
           "focus:border-blue-500 focus:ring-2 focus:ring-blue-100",
+          "dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500 dark:disabled:bg-gray-800",
           "disabled:cursor-not-allowed disabled:bg-slate-100",
           errorMessage
-            ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-            : "border-slate-300",
+            ? "border-red-500 focus:border-red-500 focus:ring-red-100 dark:border-red-400 dark:focus:ring-red-950"
+            : "border-slate-300 dark:border-gray-700 dark:focus:ring-blue-900",
         ].join(" ")}
         {...register(name)}
       />
 
       {errorMessage && (
-        <p id={errorId} role="alert" className="mt-2 text-sm text-red-600">
+        <p
+          id={errorId}
+          role="alert"
+          className="mt-2 text-sm text-red-600 dark:text-red-400"
+        >
           {errorMessage}
         </p>
       )}

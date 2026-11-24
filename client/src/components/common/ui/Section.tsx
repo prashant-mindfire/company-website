@@ -6,9 +6,9 @@ type SectionProps = HTMLAttributes<HTMLElement> & {
 };
 
 const backgroundStyles = {
-  white: "bg-white",
-  light: "bg-slate-50",
-  dark: "bg-slate-900 text-white",
+  white: "bg-white dark:bg-gray-950",
+  light: "bg-gray-50 dark:bg-gray-900",
+  dark: "bg-gray-900 text-white dark:bg-gray-950",
 };
 
 const spacingStyles = {

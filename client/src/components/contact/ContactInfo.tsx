@@ -15,11 +15,11 @@ export default function ContactInfo({
   return (
     <div className="space-y-6">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
+        <p className="text-sm font-semibold uppercase tracking-widest text-blue-600 dark:text-white">
           Get in touch
         </p>
 
-        <h2 className="mt-3 text-3xl font-bold text-slate-900">
+        <h2 className="mt-3 text-3xl font-bold text-slate-900 dark:text-white">
           Let&apos;s talk about your project
         </h2>
 
@@ -32,31 +32,39 @@ export default function ContactInfo({
       <Card padding="lg">
         <div className="space-y-6">
           <div>
-            <p className="text-sm font-semibold text-slate-900">Email</p>
+            <p className="text-sm font-semibold text-slate-900 dark:text-gray-400">
+              Email
+            </p>
 
-            <a
+            <Link
               href={`mailto:${email}`}
-              className="mt-2 inline-block text-sm text-slate-600 hover:text-blue-600"
+              className="mt-2 inline-block text-sm text-slate-600 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400"
             >
               {email}
-            </a>
+            </Link>
           </div>
 
           <div>
-            <p className="text-sm font-semibold text-slate-900">Phone</p>
+            <p className="text-sm font-semibold text-slate-900 dark:text-gray-400">
+              Phone
+            </p>
 
             <Link
               href={`tel:${phone}`}
-              className="mt-2 inline-block text-sm text-slate-600 hover:text-blue-600"
+              className="mt-2 inline-block text-sm text-slate-600 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400"
             >
               {phone}
             </Link>
           </div>
 
           <div>
-            <p className="text-sm font-semibold text-slate-900">Address</p>
+            <p className="text-sm font-semibold text-slate-900 dark:text-gray-400">
+              Address
+            </p>
 
-            <p className="mt-2 text-sm leading-7 text-slate-600">{address}</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600 dark:text-gray-200">
+              {address}
+            </p>
           </div>
         </div>
       </Card>

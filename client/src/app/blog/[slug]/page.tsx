@@ -112,6 +112,7 @@ const BlogDetail = async ({ params }: BlogDetailPageProps) => {
                   priority
                   sizes="(max-width: 1024px) 100vw, 1024px"
                   className="object-cover"
+                  loading="eager"
                 />
               </div>
             )}

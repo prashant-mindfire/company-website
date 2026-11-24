@@ -24,21 +24,25 @@ const PageHero = ({
         {eyebrow && (
           <p
             className={`mb-4 text-sm font-semibold uppercase tracking-widest ${
-              isDark ? "text-blue-400" : "text-blue-600"
+              isDark ? "text-blue-400" : "text-blue-600 dark:text-blue-400"
             }`}
           >
             {eyebrow}
           </p>
         )}
 
-        <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
+        <h1
+          className={`text-4xl font-bold tracking-tight md:text-6xl ${
+            isDark ? "text-white" : "text-gray-900 dark:text-white"
+          }`}
+        >
           {title}
         </h1>
 
         {description && (
           <p
             className={`mx-auto mt-6 max-w-2xl text-lg leading-8 ${
-              isDark ? "text-slate-300" : "text-slate-600"
+              isDark ? "text-slate-300" : "text-slate-600 dark:text-gray-400"
             }`}
           >
             {description}

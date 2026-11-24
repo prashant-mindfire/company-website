@@ -9,7 +9,7 @@ import Section from "@/components/common/ui/Section";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Contact Us | TechNova Solutions",
+  title: "Contact Us",
   description:
     "Get in touch with TechNova Solutions to discuss your next technology project.",
 };

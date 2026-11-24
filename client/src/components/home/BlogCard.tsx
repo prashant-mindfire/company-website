@@ -17,11 +17,12 @@ export default function BlogCard({ blog }: BlogCardProps) {
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          loading="eager"
         />
       </div>
 
       <div className="p-6">
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
           {blog.author} ·{" "}
           {new Date(blog.publishedDate).toLocaleDateString("en-US", {
             day: "numeric",
@@ -31,15 +32,17 @@ export default function BlogCard({ blog }: BlogCardProps) {
           })}
         </p>
 
-        <h3 className="mt-3 text-xl font-semibold text-gray-900">
+        <h3 className="mt-3 text-xl font-semibold text-gray-900 dark:text-white">
           {blog.title}
         </h3>
 
-        <p className="mt-3 text-sm leading-6 text-gray-600">{blog.excerpt}</p>
+        <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
+          {blog.excerpt}
+        </p>
 
         <Link
           href={`/blog/${blog.slug}`}
-          className="mt-5 inline-block font-medium text-blue-600 hover:text-blue-800"
+          className="mt-5 inline-block font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
         >
           Read more →
         </Link>

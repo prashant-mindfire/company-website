@@ -8,8 +8,9 @@ import PageHero from "@/components/common/ui/PageHero";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "About Us | TechNova Solutions",
-  description: "Learn about TechNova Solutions, our mission, vision, and team.",
+  title: "About Us",
+  description:
+    "Learn about TechNova Solutions, our mission, vision and the team behind our technology services.",
 };
 
 export default async function AboutPage() {

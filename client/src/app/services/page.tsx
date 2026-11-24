@@ -5,9 +5,9 @@ import ServicesPageSection from "@/components/services/ServicesPageSection";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Our Services | TechNova Solutions",
+  title: "Our Services",
   description:
-    "Explore web development, mobile app development, cloud solutions, and other services from TechNova Solutions.",
+    "Explore web development, mobile application development and cloud solutions from TechNova Solutions.",
 };
 
 const ServicesPage = async () => {

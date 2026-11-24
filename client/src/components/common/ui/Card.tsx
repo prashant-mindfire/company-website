@@ -1,39 +1,36 @@
+"use client";
+
 import type { HTMLAttributes } from "react";
 
-type CardProps = HTMLAttributes<HTMLDivElement> & {
+interface CardProps extends HTMLAttributes<HTMLDivElement> {
   padding?: "none" | "sm" | "md" | "lg";
   hoverable?: boolean;
-};
+}
 
-const paddingStyles = {
+const paddingClasses = {
   none: "",
-  sm: "p-4",
-  md: "p-6",
+  sm: "p-3",
+  md: "p-5",
   lg: "p-8",
 };
 
-const Card = ({
+export default function Card({
   children,
-  className = "",
   padding = "md",
   hoverable = false,
+  className = "",
   ...props
-}: CardProps) => {
+}: CardProps) {
   return (
     <div
-      className={[
-        "rounded-2xl border border-slate-200 bg-white shadow-sm",
-        paddingStyles[padding],
-        hoverable
-          ? "transition duration-200 hover:-translate-y-1 hover:shadow-lg"
-          : "",
-        className,
-      ].join(" ")}
+      className={`rounded-xl border border-gray-200 bg-white shadow-sm
+        dark:border-gray-800 dark:bg-gray-900 dark:shadow-none
+        ${paddingClasses[padding]}
+        ${hoverable ? "transition hover:-translate-y-1 hover:shadow-md dark:hover:border-gray-700" : ""}
+        ${className}`}
       {...props}
     >
       {children}
     </div>
   );
-};
-
-export default Card;
+}

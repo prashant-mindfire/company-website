@@ -35,7 +35,7 @@ const BlogPagination = ({
       {currentPage > 1 ? (
         <Link
           href={createPageUrl(currentPage - 1)}
-          className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+          className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
         >
           Previous
         </Link>
@@ -45,14 +45,14 @@ const BlogPagination = ({
         </span>
       )}
 
-      <span className="text-sm text-slate-600">
+      <span className="text-sm text-slate-600 dark:bg-blue-500">
         Page {currentPage} of {pageCount}
       </span>
 
       {currentPage < pageCount ? (
         <Link
           href={createPageUrl(currentPage + 1)}
-          className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+          className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
         >
           Next
         </Link>

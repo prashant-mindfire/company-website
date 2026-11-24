@@ -26,9 +26,10 @@ export default function BlogCard({ post }: BlogCardProps) {
           <Image
             src={getStrapiMediaUrl(post.image?.url)}
             alt={post.image?.alternativeText || post.title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover"
+            width={800}
+            height={450}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="h-52 w-full object-cover"
           />
         </div>
         <div className="p-6">
