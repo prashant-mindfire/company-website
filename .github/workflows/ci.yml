@@ -1,0 +1,76 @@
+name: Company Website Monorepo CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      client: ${{ steps.filter.outputs.client }}
+      strapi: ${{ steps.filter.outputs.strapi }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            client:
+              - 'client/**'
+            strapi:
+              - 'strapi-cms/**'
+
+  ci-format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - run: npm run format:check
+
+  ci-client:
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.client == 'true' }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+      - run: npm install --legacy-peer-deps
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ variables.NEXT_PUBLIC_SITE_URL}}
+          CMS_URL: ${{ variables.CMS_URL }}
+          CMS_API_TOKEN: ${{ secrets.CMS_API_TOKEN }}
+
+  ci-strapi:
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.strapi == 'true' }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./strapi-cms
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: strapi-cms/package-lock.json
+      - run: npm ci
+      - run: npm run build
