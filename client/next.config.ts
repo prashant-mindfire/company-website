@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    dangerouslyAllowLocalIP: true,
+    dangerouslyAllowLocalIP: process.env.NODE_ENV === 'development',
     remotePatterns: [
       {
         protocol: "http",
@@ -22,6 +22,7 @@ const nextConfig: NextConfig = {
         port: "1337",
         pathname: "/uploads/**",
       },
+      { protocol: 'https', hostname: '*.onrender.com' },
     ],
   },
 };
