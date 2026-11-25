@@ -54,8 +54,8 @@ jobs:
       - run: npm run test
       - run: npm run build
         env:
-          NEXT_PUBLIC_SITE_URL: ${{ variables.NEXT_PUBLIC_SITE_URL}}
-          CMS_URL: ${{ variables.CMS_URL }}
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL}}
+          CMS_URL: ${{ vars.CMS_URL }}
           CMS_API_TOKEN: ${{ secrets.CMS_API_TOKEN }}
 
   ci-strapi:
