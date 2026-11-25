@@ -44,11 +44,40 @@ Open <http://localhost:3000>.
 ## Available Scripts
 
 ```bash
-npm run dev    # Start the Next.js development server
-npm run lint   # Run ESLint
-npm run build  # Create a production build
-npm run start  # Run the production build
+npm run dev          # Start the Next.js development server
+npm run lint         # Run ESLint
+npm run build        # Create a production build
+npm run start        # Run the production build
+npm test             # Start Vitest in watch mode
+npm run test:run     # Run the complete test suite once
+npm run test:coverage # Run tests and generate a coverage report
 ```
+
+## Testing
+
+The client test suite uses Vitest, jsdom, React Testing Library, and jest-dom.
+
+Run all tests once:
+
+```bash
+npm run test:run
+```
+
+Run tests during development:
+
+```bash
+npm test
+```
+
+Generate the coverage report:
+
+```bash
+npm run test:coverage
+```
+
+Vitest is configured in `vitest.config.mts`. Shared browser and Testing Library setup is loaded from `src/test/setup.ts`. Coverage reports are written to `coverage/`, with text output shown in the terminal and HTML/JSON reports available in that directory.
+
+Tests cover CMS services, the contact API route, validation and utility functions, interactive React components, blog navigation, route utilities, and shared UI primitives.
 
 ## Strapi Integration
 
