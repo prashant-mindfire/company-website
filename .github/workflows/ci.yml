@@ -13,7 +13,7 @@ jobs:
       client: ${{ steps.filter.outputs.client }}
       strapi: ${{ steps.filter.outputs.strapi }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: dorny/paths-filter@v3
         id: filter
         with:
@@ -26,13 +26,13 @@ jobs:
   ci-format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
           cache: 'npm'
           cache-dependency-path: package-lock.json
-      - run: npm ci
+      - run: npm ci --ignore-scripts
       - run: npm run format:check
 
   ci-client:
@@ -43,10 +43,10 @@ jobs:
       run:
         working-directory: ./client
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
           cache: 'npm'
           cache-dependency-path: client/package-lock.json
       - run: npm install --legacy-peer-deps
@@ -66,10 +66,10 @@ jobs:
       run:
         working-directory: ./strapi-cms
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
           cache: 'npm'
           cache-dependency-path: strapi-cms/package-lock.json
       - run: npm ci
